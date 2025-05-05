@@ -31,7 +31,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Collider2D _collider;
     [SerializeField] private float _colliderWaitTime;
     
-    [FormerlySerializedAs("_groundLayer")]
     [Header("Ground Check")]
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private Transform _bottomOverlap;
@@ -40,30 +39,30 @@ public class Player : MonoBehaviour
     private bool _wasGroundedPreviousFrame;
 
     [Header("Jumping")] 
-    private int _doubleJumpNb = 0;
     [SerializeField] private int _maxJumpNb = 1;
     [SerializeField] private float _jumpMoveForce = 15;
-    private float _jumpBuffer;
     [SerializeField] private float _jumpBufferMax = .5f;
-    private float _linearVelocityXOnJumpStart;
-
     [SerializeField] private bool _isApplyingJump;
     [SerializeField] private float _jumpForce = 10;
     //[SerializeField] private float _coyoteTime = 0.5f;
     [SerializeField] private float _jumpVelocityXModifier;
     [SerializeField] private float _lowJumpFactor;
+    private int _doubleJumpNb = 0;
+    private float _jumpBuffer;
+    private float _linearVelocityXOnJumpStart;
     
     [Header("Movement")]
     [SerializeField] private float _xMovement;
-    [SerializeField] private float _currentVelocity;
     [SerializeField] private float _currentSpeed = 2;
-    [FormerlySerializedAs("_maxSpeed")] [SerializeField] private float _maxVelocity = 10;
+    [SerializeField] private float _maxVelocity = 5;
     [SerializeField] private float _movementSmoothTime = .1f;
+    private float _currentVelocity;
 
     #endregion
     
     #region Unity API
     
+    // TODO: Figure out where and why either _currentVelocity or _currentSpeed are being reset 
     private void Awake()
     {
         _characterController2D = GetComponent<ICharacterController2D>();
@@ -170,7 +169,7 @@ public class Player : MonoBehaviour
                 m_currentState = STATE.JUMP;
                 ResetVerticalVelocity();
                 _isApplyingJump = true;
-                // _linearVelocity on jumpstart = Mathf.Max(1, Mathf.Abs(_rigidbody.linearVelocity.x))
+                _linearVelocityXOnJumpStart = Mathf.Max(1, Mathf.Abs(_rigidbody2D.linearVelocity.x));
                 _rigidbody2D.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
                 break;
         }
@@ -252,11 +251,11 @@ public class Player : MonoBehaviour
     
     private void AirborneMove()
     {
-        _rigidbody2D.AddForce(new Vector2(_xMovement*_jumpMoveForce,0));
-        if (Mathf.Abs(_rigidbody2D.linearVelocity.x) > _linearVelocityXOnJumpStart*_jumpVelocityXModifier)
+        _rigidbody2D.AddForce(new Vector2(_xMovement * _jumpMoveForce, 0));
+        if (Mathf.Abs(_rigidbody2D.linearVelocity.x) > _linearVelocityXOnJumpStart * _jumpVelocityXModifier)
         {
             float sign = Mathf.Sign(_rigidbody2D.linearVelocity.x);
-            _rigidbody2D.linearVelocity = new Vector2(sign*_linearVelocityXOnJumpStart*_jumpVelocityXModifier,_rigidbody2D.linearVelocity.y);
+            _rigidbody2D.linearVelocity = new Vector2(sign * _linearVelocityXOnJumpStart * _jumpVelocityXModifier, _rigidbody2D.linearVelocity.y);
         }
     }
     

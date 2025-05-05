@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398705852740807562}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.48, y: 0.51, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -60,17 +60,20 @@ MonoBehaviour:
   _colliderWaitTime: 0
   _groundLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   _bottomOverlap: {fileID: 6250975196225331060}
   _groundCheckRadius: 0.2
+  _maxJumpNb: 1
+  _jumpMoveForce: 15
+  _jumpBufferMax: 0.5
   _isApplyingJump: 0
   _jumpForce: 6
   _jumpVelocityXModifier: 1.2
   _lowJumpFactor: 10
   _xMovement: 0
-  _currentVelocity: 0
-  _currentSpeed: 2
-  _maxVelocity: 10
+  _currentSpeed: 200
+  _maxVelocity: 5
+  _movementSmoothTime: 0.1
 --- !u!114 &2526015102816815102
 MonoBehaviour:
   m_ObjectHideFlags: 0

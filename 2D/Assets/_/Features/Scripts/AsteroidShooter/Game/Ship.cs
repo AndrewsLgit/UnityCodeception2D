@@ -64,7 +64,6 @@ public class Ship : MonoBehaviour
         {
             _shipRigidbody.AddForce((transform.up * (moveInput.y * _speed)));
             _shipRigidbody.AddForce((transform.right * (moveInput.x * _speed)));
-            
         }
         _thrusterSprite.SetActive(moveInput.magnitude > 0);
         
