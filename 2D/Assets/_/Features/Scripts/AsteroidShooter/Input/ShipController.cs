@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using InputSystem = Input.InputSystem;
+using InputSystem = ASInput.ASInputSystem;
 
 
 public interface IShipController

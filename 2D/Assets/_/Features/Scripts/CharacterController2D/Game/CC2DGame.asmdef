@@ -1,0 +1,16 @@
+{
+    "name": "CC2DGame",
+    "rootNamespace": "",
+    "references": [
+        "GUID:1225c35dd7d3241b59eed6194e7456a4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
